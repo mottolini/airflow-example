@@ -21,7 +21,7 @@ dag = DAG(
 
 init_environments = [k8s.V1EnvVar(name="MINIO_ENDPOINT", value="minio.vvp.svc.cluster.local:9000"), 
                      k8s.V1EnvVar(name="JAR_PREFIX", value="proximai-data/experiments/job_emr"),
-                     k8s.V1EnvVar(name="AWS_ACCESS_KEY_ID', value="admin"),
+                     k8s.V1EnvVar(name="AWS_ACCESS_KEY_ID", value="admin"),
                      k8s.V1EnvVar(name="AWS_SECRET_ACCESS_KEY", value="WS46advKR")]
 
 start = DummyOperator(task_id='run_this_first', dag=dag)
@@ -29,7 +29,11 @@ start = DummyOperator(task_id='run_this_first', dag=dag)
 passing = KubernetesPodOperator(namespace='spark',
                           image="paktek123/spark-submit:latest",
                           cmds=["/download_jar_and_submit.sh"],
-                          env=init_environments,
+                          env_vars={"MINIO_ENDPOINT": "minio.vvp.svc.cluster.local:9000",
+                                    "JAR_PREFIX": "proximai-data/experiments/job_emr",
+                                    "AWS_ACCESS_KEY_ID": "admin",
+                                    "AWS_SECRET_ACCESS_KEY": "WS46advKR"
+                                   },
                           arguments=["--class", "nttdata.samplecompactor.Main", "/sample-compactor-assembly-0.5.jar"],
                           labels={"foo": "bar"},
                           name="passing-test",
