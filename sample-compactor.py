@@ -31,7 +31,16 @@ passing = KubernetesPodOperator(namespace='spark',
                                     "AWS_ACCESS_KEY_ID": "admin",
                                     "AWS_SECRET_ACCESS_KEY": "WS46advKR"
                                    },
-                          arguments=["--class", "nttdata.samplecompactor.Main", "/sample-compactor-assembly-0.5.jar"],
+                          arguments=[
+                              "--conf", "spark.executorEnv.ACCESS_KEY=admin",
+                              "--conf", "spark.executorEnv.SECRET_KEY=WS46advKR",
+                              "--conf", "spark.executorEnv.ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
+                              "--conf", "spark.executorEnv.WRITE_PATH_COMPACTOR=s3a://proximai-data/datalake/compacted/samples/",
+                              "--conf", "spark.executorEnv.READ_PATH_COMPACTOR=s3a://proximai-data/datalake/rawdata/samples/",
+                              "--conf", "spark.executorEnv.MAX_RECORD_FILE_COMPACTOR=1000000000",
+                              "--class", "nttdata.samplecompactor.Main",
+                              "/sample-compactor-assembly-0.5.jar"
+                          ],
                           labels={"foo": "bar"},
                           name="passing-test",
                           task_id="passing-task",
