@@ -29,6 +29,7 @@ start = DummyOperator(task_id='run_this_first', dag=dag)
 passing = KubernetesPodOperator(namespace='spark',
                           image="paktek123/spark-submit:latest",
                           cmds=["/download_jar_and_submit.sh"],
+                          image_pull_policy="Always",
                           env_vars={"MINIO_ENDPOINT": "minio.vvp.svc.cluster.local:9000",
                                     "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
