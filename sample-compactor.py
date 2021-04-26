@@ -20,7 +20,7 @@ dag = DAG(
     'kubernetes_sample', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
 init_environments = [k8s.V1EnvVar(name="MINIO_ENDPOINT", value="minio.vvp.svc.cluster.local:9000"), 
-                     k8s.V1EnvVar(name="JAR_PREFIX", value="proximai-data/experiments/job_emr"),
+                     k8s.V1EnvVar(name="JAR_PREFIX", value="proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.jar"),
                      k8s.V1EnvVar(name="AWS_ACCESS_KEY_ID", value="admin"),
                      k8s.V1EnvVar(name="AWS_SECRET_ACCESS_KEY", value="WS46advKR")]
 
@@ -30,7 +30,7 @@ passing = KubernetesPodOperator(namespace='spark',
                           image="paktek123/spark-submit:latest",
                           cmds=["/download_jar_and_submit.sh"],
                           env_vars={"MINIO_ENDPOINT": "minio.vvp.svc.cluster.local:9000",
-                                    "JAR_PREFIX": "proximai-data/experiments/job_emr",
+                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
                                     "AWS_SECRET_ACCESS_KEY": "WS46advKR"
                                    },
