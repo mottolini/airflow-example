@@ -38,6 +38,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.executorEnv.WRITE_PATH_COMPACTOR=s3a://proximai-data/datalake/compacted/samples/",
                               "--conf", "spark.executorEnv.READ_PATH_COMPACTOR=s3a://proximai-data/datalake/rawdata/samples/",
                               "--conf", "spark.executorEnv.MAX_RECORD_FILE_COMPACTOR=1000000000",
+                              "--deploy-mode", "client",
                               "--class", "nttdata.samplecompactor.Main",
                               "/sample-compactor-assembly-0.5.jar"
                           ],
