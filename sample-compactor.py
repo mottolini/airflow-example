@@ -23,24 +23,24 @@ dag = DAG(
 start = DummyOperator(task_id='run_this_first', dag=dag)
 
 passing = KubernetesPodOperator(namespace='spark',
-                          image="paktek123/spark-submit:latest",
+                          image="ottolini/spark-submit:latest",
                           cmds=["/download_jar_and_submit.sh"],
                           image_pull_policy="Always",
                           env_vars={"MINIO_ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.jar",
+                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.3.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
                                     "AWS_SECRET_ACCESS_KEY": "WS46advKR"
                                    },
                           arguments=[
-                              "--conf", "spark.executorEnv.ACCESS_KEY=admin",
-                              "--conf", "spark.executorEnv.SECRET_KEY=WS46advKR",
-                              "--conf", "spark.executorEnv.ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
+                              "--conf", "spark.executorEnv.AWS_ACCESS_KEY_ID=admin",
+                              "--conf", "spark.executorEnv.AWS_SECRET_ACCESS_KEY=WS46advKR",
+                              "--conf", "spark.executorEnv.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--conf", "spark.executorEnv.WRITE_PATH_COMPACTOR=s3a://proximai-data/datalake/compacted/samples/",
                               "--conf", "spark.executorEnv.READ_PATH_COMPACTOR=s3a://proximai-data/datalake/rawdata/samples/",
                               "--conf", "spark.executorEnv.MAX_RECORD_FILE_COMPACTOR=1000000000",
                               "--deploy-mode", "client",
                               "--class", "nttdata.samplecompactor.Main",
-                              "/sample-compactor-assembly-0.5.jar"
+                              "/sample-compactor-assembly-0.5.3.jar"
                           ],
                           labels={"foo": "bar"},
                           name="passing-test",
