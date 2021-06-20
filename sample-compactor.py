@@ -29,10 +29,12 @@ passing = KubernetesPodOperator(namespace='spark',
                           env_vars={"MINIO_ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
                                     "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.5.3.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
-                                    "AWS_SECRET_ACCESS_KEY": "WS46advKR"
+                                    "AWS_SECRET_ACCESS_KEY": "WS46advKR",
+                                    "ACCESS_KEY": "ENV_DIRECT"
                                    },
                           arguments=[
                               "--conf", "spark.executorEnv.TEST=TEST_EXECUTOR",
+                              "--conf", "ACCESS_KEY=CONF_DIRECT",
                               "--conf", "spark.executorEnv.AWS_ACCESS_KEY_ID=admin",
                               "--conf", "spark.executorEnv.AWS_SECRET_ACCESS_KEY=WS46advKR",
                               "--conf", "spark.executorEnv.ACCESS_KEY=pippo",
