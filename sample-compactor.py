@@ -41,7 +41,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--deploy-mode", "client",
                               "--class", "nttdata.samplecompactor.Main",
-                              "/sample-compactor-assembly-0.5.3.jar"
+                              "/sample-compactor-assembly-0.5.jar"
                           ],
                           labels={"foo": "bar"},
                           name="passing-test",
