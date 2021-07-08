@@ -40,7 +40,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_SECRET_ACCESS_KEY=WS46advKR",
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--deploy-mode", "client",
-                              "--class", "nttdata.samplecompactor.Main",
+                              "--class", "org.example.SimpleApp",
                               "/sample-compactor-assembly-0.6.jar"
                           ],
                           labels={"foo": "bar"},
