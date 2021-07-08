@@ -39,6 +39,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_ACCESS_KEY_ID=admin",
                               "--conf", "spark.driver.AWS_SECRET_ACCESS_KEY=WS46advKR",
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
+                              "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
                               "--class", "org.example.SimpleApp",
                               "/sample-compactor-assembly-0.6.jar"
