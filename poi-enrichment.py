@@ -27,13 +27,13 @@ passing = KubernetesPodOperator(namespace='spark',
                           cmds=["/download_jar_and_submit.sh"],
                           image_pull_policy="Always",
                           env_vars={"MINIO_ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.6.jar",
+                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/poi-enricher-assembly-0.6.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
                                     "AWS_SECRET_ACCESS_KEY": "WS46advKR",
                                     "ACCESS_KEY": "admin",
                                     "SECRET_KEY": "WS46advKR",
                                     "ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/compacted/samples/"
+                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/inferreddata/enrichedPoi/"
                                    },
                           arguments=[
                               "--conf", "spark.driver.AWS_ACCESS_KEY_ID=admin",
@@ -41,8 +41,8 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
-                              "--class", "org.example.SimpleApp",
-                              "/sample-compactor-assembly-0.6.jar"
+                              "--class", "ai.proxim.PoiEnrichment",
+                              "/poi-enricher-assembly-0.6.jar"
                           ],
                           labels={"foo": "bar"},
                           name="passing-test",
