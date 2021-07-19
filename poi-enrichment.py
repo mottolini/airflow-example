@@ -33,7 +33,8 @@ passing = KubernetesPodOperator(namespace='spark',
                                     "ACCESS_KEY": "admin",
                                     "SECRET_KEY": "WS46advKR",
                                     "ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/inferreddata/enrichedPoi/"
+                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/inferreddata/enrichedPoi/",
+                                    "READ_PATH_COMPACTOR": "s3a://proximai-data/datalake/rawdata/devices/"
                                    },
                           arguments=[
                               "--conf", "spark.driver.AWS_ACCESS_KEY_ID=admin",
