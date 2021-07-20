@@ -37,7 +37,8 @@ passing = KubernetesPodOperator(namespace='spark',
                                    },
                           arguments=[
                               "--verbose",
-                              "--deploy-mode", "client",
+                              "--master", "yarn"
+                              "--deploy-mode", "cluster",
                               "--driver-memory", "4g",
                               "--num-executors" ,"2", 
                               "--executor-memory", "2g", 
