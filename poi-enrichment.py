@@ -37,7 +37,11 @@ passing = KubernetesPodOperator(namespace='spark',
                                    },
                           arguments=[
                               "--verbose",
-                              "--deploy-mode", "cluster",
+                              "--deploy-mode", "client",
+                              "--driver-memory", "4g",
+                              "--num-executors" ,"2", 
+                              "--executor-memory", "2g", 
+                              "--executor-cores", "2",
                               "--class", "ai.proxim.PoiEnrichment",
                               "/poi-enricher-assembly-0.6.3.jar"
                           ],
