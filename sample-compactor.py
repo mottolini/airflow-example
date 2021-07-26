@@ -17,7 +17,7 @@ default_args = {
 }
 
 dag = DAG(
-    'kubernetes_sample', default_args=default_args, schedule_interval=timedelta(minutes=10))
+    'sample_compactor', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
 
 start = DummyOperator(task_id='run_this_first', dag=dag)
@@ -27,7 +27,7 @@ passing = KubernetesPodOperator(namespace='spark',
                           cmds=["/download_jar_and_submit.sh"],
                           image_pull_policy="Always",
                           env_vars={"MINIO_ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.6.jar",
+                                    "JAR_PREFIX": "proximai-data/experiments/job_emr/sample-compactor-assembly-0.6.1.jar",
                                     "AWS_ACCESS_KEY_ID": "admin",
                                     "AWS_SECRET_ACCESS_KEY": "WS46advKR",
                                     "ACCESS_KEY": "admin",
@@ -41,8 +41,8 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
-                              "--class", "org.example.SimpleApp",
-                              "/sample-compactor-assembly-0.6.jar"
+                              "--class", "ai.proxim.SampleCompactor",
+                              "/sample-compactor-assembly-0.6.1.jar"
                           ],
                           labels={"foo": "bar"},
                           name="passing-test",
