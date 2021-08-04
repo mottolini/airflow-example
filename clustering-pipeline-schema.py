@@ -41,7 +41,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
-                              "--py-files", "/data-analysis-venv.tar.gz",
+                              "--py-files", "data-analysis-venv.tar.gz",
                               "/clustering_pipeline_schema.py"
                           ],
                           labels={"foo": "bar"},
