@@ -34,14 +34,14 @@ passing = KubernetesPodOperator(namespace='spark',
                                     "ACCESS_KEY": "admin",
                                     "SECRET_KEY": "WS46advKR",
                                     "ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
-                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/compacted/samples2/"
+                                    "WRITE_PATH_COMPACTOR": "s3a://proximai-data/datalake/compacted/samples2/",
+                                    "PYSPARK_PYTHON": "/opt/bitnami/python/bin/python"
                                    },
                           arguments=[
                               "--conf", "spark.driver.AWS_ACCESS_KEY_ID=admin",
                               "--conf", "spark.driver.AWS_SECRET_ACCESS_KEY=WS46advKR",
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://minio.vvp.svc.cluster.local:9000",
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
-                              "--conf", "spark.executorEnv.PYSPARK_PYTHON=/opt/bitnami/python/bin/python",
                               "--deploy-mode", "client",
                               "--packages", "org.apache.hadoop:hadoop-aws:3.2.0,com.amazonaws:aws-java-sdk-bundle:1.11.874",
                               "/clustering_pipeline_schema.py"
