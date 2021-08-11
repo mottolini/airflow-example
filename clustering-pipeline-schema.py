@@ -43,7 +43,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
                               "--packages", "org.apache.hadoop:hadoop-aws:3.2.0,com.amazonaws:aws-java-sdk-bundle:1.11.874",
-                              "/clustering_pipeline_schema.py"
+                              "clustering_pipeline_schema.py"
                           ],
                           labels={"foo": "bar"},
                           name="passing-test",
