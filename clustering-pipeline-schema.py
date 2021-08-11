@@ -23,7 +23,7 @@ dag = DAG(
 start = DummyOperator(task_id='run_this_first', dag=dag)
 
 passing = KubernetesPodOperator(namespace='spark',
-                          image="ottolini/spark-submit:spark3.1.1-hadoop3.2",
+                          image="ottolini/spark-submit:python",
                           cmds=["/download_jar_and_submit.sh"],
                           image_pull_policy="Always",
                           env_vars={"MINIO_ENDPOINT": "http://minio.vvp.svc.cluster.local:9000",
