@@ -41,7 +41,7 @@ passing = KubernetesPodOperator(namespace='spark',
                               "--conf", "spark.driver.AWS_S3_ENDPOINT=http://100.71.92.21:9000",
                               "--conf", "spark.hadoop.fs.s3a.path.style.access=true",
                               "--deploy-mode", "client",
-                              "--class", "ai.proxim.PoiEnrichment",
+                              "--class", "ai.proxim.PoiEnrichmentTest",
                               "/poi-enricher-assembly-test.jar"
                           ],
                           labels={"foo": "bar"},
